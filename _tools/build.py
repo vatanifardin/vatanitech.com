@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds every page of vatanilabs.com as plain HTML, in three languages.
+"""Builds every page of vatanitech.com as plain HTML, in three languages.
 
 Run:  python3 -I _tools/build.py   (from the site folder)
 
@@ -53,7 +53,7 @@ def wr(p, text):
 
 
 # ------------------------------------------------------------- languages
-SITE = 'https://vatanilabs.com'
+SITE = 'https://vatanitech.com'
 LANGS = ('en', 'az', 'ru')                  # the order of the rows in site_texts.py
 NAMES = {'en': 'English', 'az': 'Azərbaycanca', 'ru': 'Русский'}
 PRE = {'en': '', 'az': '/az', 'ru': '/ru'}  # where each language lives on the site
@@ -169,8 +169,8 @@ def page(key, body, path='/', scripts=(), found=True, name=None, app=None):
 <meta name="theme-color" content="#04060c">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="https://vatanilabs.com/assets/img/icon-512.png">
-<meta property="og:url" content="https://vatanilabs.com{u(path)}">
+<meta property="og:image" content="https://vatanitech.com/assets/img/icon-512.png">
+<meta property="og:url" content="https://vatanitech.com{u(path)}">
 <meta property="og:locale" content="{LOCALE[L]}">
 {seo}<link rel="icon" type="image/png" href="/assets/img/favicon.png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
@@ -200,7 +200,7 @@ def page(key, body, path='/', scripts=(), found=True, name=None, app=None):
     <span>© 2026 Vatani Tech · {t('foot_place')}</span>
     <nav aria-label="{e('nav_footer')}">
       {foot}
-      <a href="mailto:support@vatanilabs.com">support@vatanilabs.com</a>
+      <a href="mailto:support@vatanitech.com">support@vatanitech.com</a>
     </nav>
     <nav class="foot-langs" aria-label="{e('lang')}">{switch}</nav>
   </div>
@@ -614,7 +614,7 @@ def soon_panel(app):
       <div class="bento">
         {cards}
       </div>
-      <div class="actions" style="margin-top:26px">{own}<a class="btn" href="mailto:support@vatanilabs.com?subject={subject}">{t('next_cta')} <span class="arr">→</span></a></div>
+      <div class="actions" style="margin-top:26px">{own}<a class="btn" href="mailto:support@vatanitech.com?subject={subject}">{t('next_cta')} <span class="arr">→</span></a></div>
     </div>
 
 '''
@@ -726,7 +726,7 @@ def home():
       <p class="label"><span class="n">03 /</span> {t('nav_contact')}</p>
       <h2>{t('contact_h2')}</h2>
       <p>{t('contact_p')}</p>
-      <a class="mail" href="mailto:support@vatanilabs.com">support@vatanilabs.com <span class="arr">→</span></a>
+      <a class="mail" href="mailto:support@vatanitech.com">support@vatanitech.com <span class="arr">→</span></a>
     </div>
   </div>
 </section>
@@ -821,7 +821,7 @@ def geo(slug):
     icon = f'/assets/img/{slug}-icon.png'
     alt = e('icon_alt_of').format(name)
     ore, _, dig = tn('gr_slogans', name)   # the second one heads the features (gr_feat_h2)
-    mail = f'mailto:support@vatanilabs.com?subject={quote(t("next_subject") + ": " + name)}'
+    mail = f'mailto:support@vatanitech.com?subject={quote(t("next_subject") + ": " + name)}'
     # The features as living tiles, like PetroGram's page. The tool app has
     # its own drawings; OreGram shows PetroGram's with mining examples.
     vset(slug)
@@ -903,7 +903,7 @@ def geo(slug):
 def solo(slug):
     _, name, k, glow = SOON_BY[slug][:4]
     icon, alt = f'/assets/img/{slug}-icon.png', e('icon_alt_of').format(name)
-    mail = f'mailto:support@vatanilabs.com?subject={quote(t("next_subject") + ": " + name)}'
+    mail = f'mailto:support@vatanitech.com?subject={quote(t("next_subject") + ": " + name)}'
     vset(slug)
     if slug == 'petro-rulers':
         tiles = [t_ruler('w7', 0, PIPE), t_angle('w5', .08), t_scan('w7', 0, VALVE), t_flash('w5', .08),

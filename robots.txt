@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://vatanilabs.com/sitemap.xml
+Sitemap: https://vatanitech.com/sitemap.xml

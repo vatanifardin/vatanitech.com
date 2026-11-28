@@ -17,7 +17,7 @@
 # (Google passes the name and picture link) and 6f (all that sync copies).
 
 MAIL_OLD = '<a href="mailto:vatanifardin@gmail.com">vatanifardin@gmail.com</a>'
-MAIL_NEW = '<a href="mailto:support@vatanilabs.com">support@vatanilabs.com</a>'
+MAIL_NEW = '<a href="mailto:support@vatanitech.com">support@vatanitech.com</a>'
 CONTACT = ('<p>Fardin Vatani<br>', '<p>Vatani Tech (Fardin Vatani)<br>')
 
 PRIV = {
@@ -248,6 +248,6 @@ ZH_SECTION = '''<section id="zh" lang="zh-Hans">
 
   <h2>12. 联系方式</h2>
   <p>Vatani Tech（Fardin Vatani）<br>
-  电子邮件：<a href="mailto:support@vatanilabs.com">support@vatanilabs.com</a><br>
+  电子邮件：<a href="mailto:support@vatanitech.com">support@vatanitech.com</a><br>
   电话：+994 70 294 19 98</p>
 </section>'''

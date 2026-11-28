@@ -15,9 +15,9 @@
 # subject filled in, {PRIVACY} the address of the privacy policy.
 
 DEL_SUBJECT = 'Delete my PetroGram account'     # the same in every language
-DEL_MAIL = (f'<a href="mailto:support@vatanilabs.com?subject={quote(DEL_SUBJECT)}">'
-            'support@vatanilabs.com</a>')
-DEL_ASK = '<a href="mailto:support@vatanilabs.com">support@vatanilabs.com</a>'
+DEL_MAIL = (f'<a href="mailto:support@vatanitech.com?subject={quote(DEL_SUBJECT)}">'
+            'support@vatanitech.com</a>')
+DEL_ASK = '<a href="mailto:support@vatanitech.com">support@vatanitech.com</a>'
 
 TX.update({
 'delete-account': ('Delete your account', 'Hesabın silinməsi', 'Удаление аккаунта'),

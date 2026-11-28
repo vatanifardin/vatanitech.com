@@ -1,4 +1,4 @@
-# vatanilabs.com
+# vatanitech.com
 
 The Vatani Tech website. Plain HTML, CSS and a little JavaScript: no
 framework, nothing to install.

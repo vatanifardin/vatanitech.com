@@ -5,7 +5,7 @@
 # Rows may hold a little HTML (<br>, <em class="s">, &amp;). Rows used inside
 # attributes or sent to the scripts (aria texts, titles, lists) are plain text.
 # To change a text, edit it here and run build.py again.
-MAILTO = '<a href="mailto:support@vatanilabs.com">support@vatanilabs.com</a>'
+MAILTO = '<a href="mailto:support@vatanitech.com">support@vatanitech.com</a>'
 
 TX = {
 # ---------------------------------------------------- header and footer
