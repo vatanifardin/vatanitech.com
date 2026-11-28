@@ -95,6 +95,10 @@ other languages.
 - `assets/`: `site.css` (all styles), `site.js` (scroll effects and the small
   animated feature tiles), `hero.js`, `land.js` (globe points), images.
   Shared by all three languages.
+  `assets/img/email-logo.png` (440 × 128, white background, made from
+  `branding/vatani-tech/vatani-tech-logo.png` of the PetroGram repository)
+  is the logo in the Gmail signature (28 November 2026): sent emails load
+  it from this address, so never move or rename it.
 - `_tools/`: the scripts that write the pages. Not published (GitHub Pages
   skips folders that start with "_").
   - `python3 -I _tools/build.py` rebuilds every page in every language, and
