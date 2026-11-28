@@ -630,13 +630,26 @@ def pg_tab():
             f'{"" if on else TABOFF}><span class="n">{num("petrogram")}</span>PetroGram</button>\n')
 
 
+# The pictures of the home page's hero, in turn: the shape (assets/hero.js),
+# its caption (a row of site_texts.py; none: the studio's name) and, for an
+# app, the app whose colour (ACCENT) the shape and its number wear. The
+# studio's three come first, then the other apps in the order of ORDER
+# (owner, 28 November 2026). PetroGram keeps the studio's teal.
+HERO = [('mark', None, None), ('globe', 'cap_globe', None), ('drop', 'cap_drop', None),
+        ('tools', 'cap_pr', 'petro-rulers'), ('compass', 'cap_gx', 'geo-rulers'), ('crystal', 'cap_gr', 'oregram'),
+        ('belt', 'cap_dg', 'domino-global'), ('chain', 'cap_df', 'domino-freedom'),
+        ('anchor', 'cap_mg', 'marinegram'), ('arch', 'cap_hz', 'quran-guardians')]
+
+
 def home():
     # Captions under the hero picture: number, text and, for the studio's
     # name, its language (so that capital letters follow English rules).
-    caps = {'mark': ['01', 'Vatani Tech', 'en'], 'globe': ['02', t('cap_globe')], 'drop': ['03', t('cap_drop')]}
+    caps = {s: [f'{k + 1:02d}', t(key)] if key else [f'{k + 1:02d}', 'Vatani Tech', 'en'] for k, (s, key, app) in enumerate(HERO)}
+    tints = {s: ACCENT[app][0] for s, key, app in HERO if app}
+    shapes = ','.join(s for s, key, app in HERO)
     return f'''<main>
 <section class="hero" aria-label="{e('hero_aria')}">
-  <div class="sculpt"><canvas id="sculpture" data-shapes="mark,globe,drop" data-captions="{data(caps)}" aria-hidden="true"></canvas><div class="sculpt-cap" id="sculpture-cap"></div></div>
+  <div class="sculpt"><canvas id="sculpture" data-shapes="{shapes}" data-captions="{data(caps)}" data-tints="{data(tints)}" aria-hidden="true"></canvas><div class="sculpt-cap" id="sculpture-cap"></div></div>
   <div class="wrap">
     <div class="hero-copy">
       <span class="pill rv"><i></i>{t('hero_pill')}</span>

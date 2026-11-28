@@ -1,7 +1,9 @@
 // The hero "sculpture": a few thousand points of light that gather into
 // the Vatani Tech mark, a slowly turning Earth (real coastlines, from
-// PetroGram's own map), an oil drop and, on the pages of other apps, a
-// cluster of crystals or a protractor on a ruler. Plain canvas, no libraries.
+// PetroGram's own map), an oil drop and a shape for each of the other apps:
+// a protractor on a ruler, a geologist's compass, crystals, a ring of
+// dominoes round the world, a line of falling dominoes, an anchor, an
+// arch. Plain canvas, no libraries.
 // It pauses off screen and stays still for people who prefer less motion.
 (function () {
   const cv = document.getElementById('sculpture');
@@ -235,7 +237,143 @@
     return sh;
   }
 
-  const makers = { mark: makeMark, globe: makeGlobe, drop: makeDrop, crystal: makeCrystal, tools: makeTools, anchor: makeAnchor, arch: makeArch };
+  // A geologist's compass (Geo-Rulers): a dial lying flat with its needle,
+  // the lid with its mirror standing up behind it, the sighting arm in front.
+  function makeCompass() {
+    const sh = blank();
+    const Y = -0.12, RD = 0.92, deg = Math.PI / 180, NA = 35 * deg, lean = 14 * deg;
+    for (let i = 0; i < L; i++) {
+      const u = rnd(), j = (rnd() - 0.5) * 0.025;
+      let x, y = Y, z, c = 0.25, a = 0.85, s = 1;
+      if (u < 0.2) {                         // the rim, and the bottom of the case under it
+        const th = rnd() * 6.283, r = RD + j, low = rnd() < 0.3;
+        x = r * Math.cos(th); z = r * Math.sin(th); if (low) { y = Y - 0.13; a = 0.45; }
+      } else if (u < 0.34) {                 // degree marks, longer at N, E, S and W
+        const k = Math.floor(rnd() * 36), th = k * 10 * deg, r = RD - 0.04 - rnd() * (k % 9 === 0 ? 0.2 : 0.09);
+        x = r * Math.cos(th); z = r * Math.sin(th); c = 0.6;
+      } else if (u < 0.4) {                  // the inner ring
+        const th = rnd() * 6.283, r = 0.52 + j * 0.5; x = r * Math.cos(th); z = r * Math.sin(th); a = 0.55;
+      } else if (u < 0.56) {                 // the needle: its north half in the accent colour
+        const q = (rnd() * 2 - 1) * 0.78, wd = 0.075 * (1 - Math.abs(q) / 0.78) * (rnd() * 2 - 1);
+        x = q * Math.cos(NA) - wd * Math.sin(NA); z = q * Math.sin(NA) + wd * Math.cos(NA); y = Y + 0.04;
+        c = q > 0 ? 1 : 0.15; a = q > 0 ? 1 : 0.8; s = q > 0.72 ? 2 : 1;
+      } else if (u < 0.6) {                  // the bubble of the level
+        const th = rnd() * 6.283, r = rnd() < 0.6 ? 0.13 : Math.sqrt(rnd()) * 0.045;
+        x = -0.36 + r * Math.cos(th); z = 0.3 + r * Math.sin(th); c = r < 0.05 ? 1 : 0.4;
+      } else if (u < 0.86) {                 // the lid, leaning back: outline, mirror and sight line
+        const v = rnd(); let lx, ly;
+        if (v < 0.45) {
+          const e = rnd() * 4.8;             // outline of a 1.3 x 1.1 frame
+          if (e < 1.3) { lx = e - 0.65; ly = 0; } else if (e < 2.4) { lx = 0.65; ly = e - 1.3; }
+          else if (e < 3.7) { lx = 3.05 - e; ly = 1.1; } else { lx = -0.65; ly = 4.8 - e; }
+        } else if (v < 0.8) { const th = rnd() * 6.283; lx = 0.42 * Math.cos(th); ly = 0.56 + 0.36 * Math.sin(th); c = 0.75; a = 0.75; }
+        else { lx = j * 0.5; ly = 0.12 + rnd() * 0.86; c = 1; a = 0.9; }
+        x = lx + j * 0.4; y = Y + ly * Math.cos(lean); z = -RD - 0.04 - ly * Math.sin(lean);
+      } else {                               // the sighting arm and its sight
+        const v = rnd();
+        if (v < 0.72) { const e = rnd(); x = rnd() < 0.5 ? -0.1 : 0.1; z = RD + 0.04 + e * 0.46; if (rnd() < 0.25) { x = (rnd() * 2 - 1) * 0.1; z = RD + 0.5; } }
+        else { x = (rnd() < 0.5 ? -0.1 : 0.1) * (rnd() < 0.7 ? 1 : rnd()); y = Y + rnd() * 0.24; z = RD + 0.5; c = 0.6; }
+      }
+      set(sh, i, x, y, z, c, a, s);
+    }
+    for (let i = L; i < N; i++) {           // dust drifting around
+      const r = 1.6 + rnd() * 0.9, u = rnd() * 2 - 1, th = rnd() * 6.283, q = Math.sqrt(1 - u * u);
+      set(sh, i, r * q * Math.cos(th), r * u * 0.8, r * q * Math.sin(th), rnd() < 0.3 ? 1 : 0, 0.26, 0.8);
+    }
+    return sh;
+  }
+
+  // Dominoes. A point of one tile with a and b pips, in the tile's own units:
+  // across -0.5 .. 0.5, along 0 .. 2 (two squares), on the side with the pips
+  // (-1) or on the blank side (1). Returns [across, along, side, colour, brightness, size].
+  const d6 = 0.27, PIP = [[], [[0, 0]], [[-d6, d6], [d6, -d6]], [[-d6, d6], [0, 0], [d6, -d6]],
+    [[-d6, -d6], [d6, -d6], [-d6, d6], [d6, d6]], [[-d6, -d6], [d6, -d6], [0, 0], [-d6, d6], [d6, d6]],
+    [[-d6, -d6], [d6, -d6], [-d6, 0], [d6, 0], [-d6, d6], [d6, d6]]];
+  function tilePoint(a, b) {
+    const q = rnd(), pips = PIP[a].map((p) => [p[0], p[1] + 0.5]).concat(PIP[b].map((p) => [p[0], p[1] + 1.5]));
+    if (q < 0.3 && pips.length) {
+      const p = pips[Math.floor(rnd() * pips.length)], th = rnd() * 6.283, r = Math.sqrt(rnd()) * 0.09;
+      return [p[0] + r * Math.cos(th), p[1] + r * Math.sin(th), -1, 1, 1, 1.25];
+    }
+    if (q < 0.38) return [(rnd() - 0.5) * 0.76, 1, -1, 0.35, 0.6, 1];          // the line between the halves
+    const back = q > 0.84, e = rnd() * 6;                                         // the edge of the tile
+    const p = e < 1 ? [e - 0.5, 0] : e < 3 ? [0.5, e - 1] : e < 4 ? [3.5 - e, 2] : [-0.5, 6 - e];
+    return [p[0], p[1], back ? 1 : -1, back ? 0.1 : 0.2, back ? 0.45 : 0.85, 1];
+  }
+  const pairs = (n) => {                  // n tiles, each matching the next, as in a game
+    const v = Array.from({ length: n + 1 }, () => Math.floor(rnd() * 7));
+    return v.slice(0, n).map((x, k) => [x, v[k + 1]]);
+  };
+
+  // A line of standing dominoes running away from us (Domino Freedom): the
+  // nearest have already fallen and the wave runs on.
+  function makeChain() {
+    const sh = blank();
+    const YF = -0.1, W = 0.32, T = 0.08, n = 9, tiles = pairs(n);
+    // places along a gentle curve, the same distance apart
+    const pts = [], at = (q) => [-0.95 + 2.1 * q, 0.95 - 1.9 * q + 0.18 * Math.sin(q * 6.283)];
+    let len = 0, prev = at(0); const step = [];
+    for (let k = 1; k <= 400; k++) { const p = at(k / 400); len += Math.hypot(p[0] - prev[0], p[1] - prev[1]); step.push([len, k / 400]); prev = p; }
+    for (let k = 0; k < n; k++) {
+      const want = (k + 0.5) / n * len, q = step.find((s) => s[0] >= want)[1];
+      const p = at(q), p2 = at(Math.min(1, q + 0.004)), dl = Math.hypot(p2[0] - p[0], p2[1] - p[1]) || 1;
+      pts.push([p[0], p[1], (p2[0] - p[0]) / dl, (p2[1] - p[1]) / dl]);
+    }
+    const tilt = [58, 58, 58, 42, 22, 6].map((x) => x * Math.PI / 180);
+    let i = 0;
+    for (let k = 0; k < n; k++) {
+      const m = k === n - 1 ? L - i : Math.floor(L / n), [bx, bz, dx, dz] = pts[k];
+      const th = tilt[k] || 0, ct = Math.cos(th), st = Math.sin(th);
+      for (let j = 0; j < m && i < L; j++, i++) {
+        const [cu, cv2, side, c, a, s] = tilePoint(tiles[k][0], tiles[k][1]);
+        const v = cv2 * W, e = side * T / 2;          // up the tile, and through it
+        const fwd = e * ct + v * st, up = v * ct - e * st;
+        set(sh, i, bx - dz * cu * W + dx * fwd, YF + up, bz + dx * cu * W + dz * fwd, c, a, s);
+      }
+    }
+    for (; i < N; i++) {                    // the floor
+      const t2 = rnd() * 6.283, r = Math.sqrt(rnd()) * 1.45;
+      set(sh, i, r * Math.cos(t2), YF - 0.01, r * Math.sin(t2), rnd() < 0.4 ? 1 : 0.2, 0.6 - r * 0.3, 0.85);
+    }
+    return sh;
+  }
+
+  // A chain of dominoes lying round the world like a ring (Domino Global).
+  function makeBelt() {
+    const sh = blank();
+    const RS = 0.8, RB = 1.16, W = 0.29, T = 0.07, n = 12, tiles = pairs(n);
+    tiles[n - 1][1] = tiles[0][0];            // the ring closes: the last tile matches the first
+    const globe = Math.floor(L * 0.32);
+    let i = 0;
+    for (; i < globe; i++) {                  // the Earth as a net of meridians and parallels
+      let lat, lon;
+      if (rnd() < 0.55) { lon = Math.floor(rnd() * 12) * Math.PI / 6; lat = (rnd() - 0.5) * Math.PI; }
+      else { lat = (Math.floor(rnd() * 5) - 2) * Math.PI / 6; lon = rnd() * 6.283; }
+      set(sh, i, RS * Math.cos(lat) * Math.sin(lon), RS * Math.sin(lat), RS * Math.cos(lat) * Math.cos(lon), 0.3, 0.7, 1);
+    }
+    for (let k = 0; k < 16; k++, i++) {       // players, here and there
+      const lat = (rnd() - 0.5) * 2.2, lon = rnd() * 6.283;
+      set(sh, i, RS * Math.cos(lat) * Math.sin(lon), RS * Math.sin(lat), RS * Math.cos(lat) * Math.cos(lon), 1, 1, 2.1);
+    }
+    const per = Math.floor((L - i) / n);
+    for (let k = 0; k < n; k++) {
+      const ph = k / n * 6.283, rx = Math.cos(ph), rz = Math.sin(ph), m = k === n - 1 ? L - i : per;
+      for (let j = 0; j < m && i < L; j++, i++) {
+        const [cu, cv2, side, c, a, s] = tilePoint(tiles[k][0], tiles[k][1]);
+        const rr = RB + cu * W, along = (cv2 - 1) * W;   // across = outward, along = round the ring
+        set(sh, i, rr * rx - along * rz, -side * T / 2, rr * rz + along * rx, c, a, s);
+      }
+    }
+    for (let k = 0; k < L; k++) sh.p[k * 3 + 1] += 0.12;   // a little higher: the near side of the ring looks bigger
+    for (; i < N; i++) {                      // dust drifting around
+      const r = 1.6 + rnd() * 0.9, u = rnd() * 2 - 1, th = rnd() * 6.283, q = Math.sqrt(1 - u * u);
+      set(sh, i, r * q * Math.cos(th), r * u * 0.8, r * q * Math.sin(th), rnd() < 0.3 ? 1 : 0, 0.26, 0.8);
+    }
+    return sh;
+  }
+
+  const makers = { mark: makeMark, globe: makeGlobe, drop: makeDrop, crystal: makeCrystal, tools: makeTools, anchor: makeAnchor, arch: makeArch,
+    compass: makeCompass, chain: makeChain, belt: makeBelt };
   const spin = {                          // how each shape turns: [y, z, x] angles
     mark: (t) => [Math.sin(t * 0.45) * 0.42, 0, Math.sin(t * 0.31) * 0.07],
     // The Earth starts facing the Caspian and turns toward the Atlantic.
@@ -245,9 +383,12 @@
     anchor: (t) => [Math.sin(t * 0.38) * 0.75, Math.sin(t * 0.5) * 0.05, 0.14],
     arch: (t) => [Math.sin(t * 0.33) * 0.42, 0, 0.05 + Math.sin(t * 0.27) * 0.05],
     tools: (t) => [Math.sin(t * 0.4) * 0.5, Math.sin(t * 0.27) * 0.05, 0.1 + Math.sin(t * 0.31) * 0.08],
+    compass: (t) => [0.5 + Math.sin(t * 0.3) * 0.6, 0, 0.45 + Math.sin(t * 0.23) * 0.05],
+    chain: (t) => [Math.sin(t * 0.3) * 0.35, 0, 0.3],
+    belt: (t) => [t * 0.3, 0.25, 0.55],
     nebula: (t) => [t * 0.1, 0, 0.2],
   };
-  const hold = { mark: 4.6, globe: 9, drop: 5.2, crystal: 8, tools: 8, anchor: 8, arch: 8 };
+  const hold = { mark: 4.6, globe: 9, drop: 5.2, crystal: 8, tools: 8, anchor: 8, arch: 8, compass: 8, chain: 8, belt: 8 };
   // Captions: number, text and, where given, the language of the text. The
   // page hands them over in its own language (see build.py).
   let captions = {
@@ -270,12 +411,23 @@
   // The page's accent colour (teal; an app's page may set its own in --acc).
   const ACC = (getComputedStyle(document.body).getPropertyValue('--acc') || '').split(',').map(Number);
   const tint = ACC.length === 3 && ACC.every((n) => n >= 0) && ACC.join() !== '44,196,184' ? ACC : [44, 212, 200];
-  const TINTS = 6, STEPS = 12, table = [];
-  for (let c = 0; c < TINTS; c++) {
-    const k = c / (TINTS - 1);
-    const r = Math.round(226 + (tint[0] - 226) * k), g = Math.round(233 + (tint[1] - 233) * k), b = Math.round(255 + (tint[2] - 255) * k);
-    table.push(Array.from({ length: STEPS + 1 }, (_, a) => `rgba(${r},${g},${b},${(a / STEPS).toFixed(3)})`));
+  // A shape may wear an app's own colour ("r,g,b" in data-tints, by shape:
+  // on the home page each app's shape is in that app's colour).
+  const tints = {};
+  try { Object.entries(JSON.parse(cv.dataset.tints || '{}')).forEach(([k, v]) => { tints[k] = String(v).split(',').map(Number); }); } catch (e) { /* the page's colour */ }
+  const tintOf = (name) => tints[name] || tint;
+  const TINTS = 6, STEPS = 12;
+  let table = [], tableKey = '';
+  function paint(rgb) {                   // the table for one accent colour
+    if (rgb.join() === tableKey) return;
+    tableKey = rgb.join(); table = [];
+    for (let c = 0; c < TINTS; c++) {
+      const k = c / (TINTS - 1);
+      const r = Math.round(226 + (rgb[0] - 226) * k), g = Math.round(233 + (rgb[1] - 233) * k), b = Math.round(255 + (rgb[2] - 255) * k);
+      table.push(Array.from({ length: STEPS + 1 }, (_, a) => `rgba(${r},${g},${b},${(a / STEPS).toFixed(3)})`));
+    }
   }
+  paint(tint);
 
   let w = 0, h = 0, cx = 0, cy = 0, R = 0;
   function resize() {
@@ -283,7 +435,10 @@
     // Sharp on good screens, but never more pixels than a modest computer can paint smoothly.
     const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(2.2e6 / Math.max(1, w * h))));
     cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // Scale each side to the rounded size, so that clearing w x h wipes every
+    // pixel: one scale for both left the last row unwiped on some screens, and
+    // the points that crossed it piled up into a broken line along the bottom.
+    ctx.setTransform(cv.width / Math.max(1, w), 0, 0, cv.height / Math.max(1, h), 0, 0);
     cx = w * 0.5; cy = h * 0.5;
     R = Math.min(w, h) * 0.3;
   }
@@ -311,6 +466,7 @@
     setTimeout(() => {
       const num = document.createElement('b'), text = document.createElement('span');
       num.textContent = captions[name][0];
+      if (tints[name]) num.style.color = `rgb(${tints[name].join()})`;
       text.textContent = captions[name][1];
       if (captions[name][2]) text.lang = captions[name][2];
       cap.replaceChildren(num, ' ', text);
@@ -332,6 +488,8 @@
     aTo[0] += mx * 0.5; aTo[2] += my * 0.3; aFrom[0] += mx * 0.5; aFrom[2] += my * 0.3;
     const A0 = from.data, B0 = to.data, D = 3.6;
     const pulse = 0.75 + 0.25 * Math.sin(t * 2.4);
+    const ta = tintOf(from.name), tb = tintOf(to.name), kt = P < 1 ? ease(P) : 1;
+    paint(ta.map((v, n) => Math.round(v + (tb[n] - v) * kt)));
 
     ctx.clearRect(0, 0, w, h);
     // A soft "atmosphere" behind the Earth, so the oceans read as a sphere.

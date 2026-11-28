@@ -44,6 +44,13 @@ TX = {
 # Captions under the hero picture (the first one is the studio's name).
 'cap_globe': ('Anywhere on Earth, offline', 'Dünyanın hər yerində, oflayn', 'В любой точке Земли, офлайн'),
 'cap_drop': ('PetroGram · oil & gas', 'PetroGram · neft və qaz', 'PetroGram · нефть и газ'),
+'cap_pr': ('Petro-Rulers · oil & gas, measured', 'Petro-Rulers · neft və qaz, ölçü ilə', 'Petro-Rulers · замеры в нефтегазе'),
+'cap_gx': ('Geo-Rulers · geology, measured', 'Geo-Rulers · geologiya, ölçü ilə', 'Geo-Rulers · замеры в геологии'),
+'cap_gr': ('OreGram · geology & mining', 'OreGram · geologiya və dağ-mədən', 'OreGram · геология и горное дело'),
+'cap_dg': ('Domino Global · with the whole world', 'Domino Global · bütün dünya ilə', 'Domino Global · со всем миром'),
+'cap_df': ('Domino Freedom · wherever you are', 'Domino Freedom · harada olsanız da', 'Domino Freedom · где бы вы ни были'),
+'cap_mg': ('MarineGram · life & work at sea', 'MarineGram · dənizdə həyat və iş', 'MarineGram · жизнь и работа в море'),
+'cap_hz': ('Quran Guardians · the Quran by heart', 'Quran Guardians · Quranı əzbərləyin', 'Quran Guardians · Коран наизусть'),
 'st_terms': ('Glossary terms', 'Lüğət termini', 'Терминов в глоссарии'),
 'st_quiz': ('Quiz questions', 'Test sualı', 'Вопросов в тестах'),
 'st_langs': ('Languages', 'Dil', 'Языков'),

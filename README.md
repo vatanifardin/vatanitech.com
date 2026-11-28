@@ -9,8 +9,14 @@ in the header (and the links in the footer) lead to the same page in the
 other languages.
 
 - `index.html`: home. The hero is a cloud of light points that forms the
-  logo, a turning Earth (real coastlines from PetroGram's own map) and an
-  oil drop (`assets/hero.js`). Then the app showcase, principles, contact.
+  logo, a turning Earth (real coastlines from PetroGram's own map), an
+  oil drop and then a shape for each of the other apps, in the app's own
+  colour (since 28 November 2026): a protractor on a ruler (Petro-Rulers),
+  a geologist's compass (Geo-Rulers), crystals (OreGram), a ring of
+  dominoes round the world (Domino Global), a line of falling dominoes
+  (Domino Freedom), an anchor (MarineGram) and an arch (Quran Guardians).
+  The list, with the captions, is `HERO` in `_tools/build.py`; the shapes
+  are in `assets/hero.js`. Then the app showcase, principles, contact.
   The showcase has one tab per app (`ORDER` in `_tools/build.py`), in the
   order the owner chose on 26 November 2026, with the two apps of
   27 November 2026 added at the end: Petro-Rulers, PetroGram, Geo-Rulers,
