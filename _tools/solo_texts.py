@@ -1,4 +1,4 @@
-# Privacy policies and terms of use of Petro-Rulers, MarineGram and Hafiz
+# Privacy policies and terms of use of Petro-Rulers, MarineGram and Quran Guardians
 # (27 November 2026), in the site's three languages: /<app>/privacy/ and
 # /<app>/terms/. Written for these apps as they are (they are not copies of
 # PetroGram's texts):
@@ -9,17 +9,17 @@
 #     them together.
 #   - MarineGram: no internet use and no data at all (so far); the AR button
 #     of the 3D view opens the phone's own AR viewer, which uses the camera.
-#   - Quran Guardians (first called Hafiz; the key and the folder keep that
-#     name): no ads, no account, no data. Recitations are downloaded (AlQuran
+#   - Quran Guardians (first called Hafiz; key and folder "quran-guardians"
+#     since 28 November 2026): no ads, no account, no data. Recitations are downloaded (AlQuran
 #     Cloud); the city name for prayer times comes from the phone's own map
 #     service; optional gifts go through the stores; the microphone is used
 #     for the person's own recordings, kept on the phone. Its policy must
 #     agree with the app's own "privacy" and "privacyLocation" texts
-#     (lib/strings.dart of the hafiz repository).
+#     (lib/strings.dart of the quran-guardians repository).
 # When an app changes what it stores or sends, change its text here, change
 # the date, and rebuild. The other languages of the apps (Arabic, Spanish,
 # French, Chinese for Petro-Rulers; Turkish, Persian, Arabic, Urdu,
-# Indonesian for Hafiz) are not written yet.
+# Indonesian for Quran Guardians) are not written yet.
 #
 # A text is plain lines: "# " the title, "@ " a small grey line, "## " a
 # heading, "- " a list item, anything else a paragraph. {MAIL} is the
@@ -283,7 +283,7 @@ MarineGram — справочный и учебный инструмент. Ег
 @ Последнее обновление: 28 ноября 2026 г.''',
   },
 },
-'hafiz': {
+'quran-guardians': {
   'privacy': {
     'en': r'''# Quran Guardians Privacy Policy
 @ Effective date: 28 November 2026

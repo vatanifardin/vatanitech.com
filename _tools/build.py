@@ -116,7 +116,7 @@ I_FLAME = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor"
 # The accent colour of an app's pages (a light tone of the app's own colour
 # and a lighter one), in place of the studio's teal: see --acc in site.css.
 ACCENT = {'oregram': ('226,176,64', '255,226,150'), 'geo-rulers': ('236,138,68', '255,200,156'),
-          'petro-rulers': ('255,200,40', '255,232,150'), 'marinegram': ('86,156,255', '176,214,255'), 'hafiz': ('52,190,130', '160,236,200'),
+          'petro-rulers': ('255,200,40', '255,232,150'), 'marinegram': ('86,156,255', '176,214,255'), 'quran-guardians': ('52,190,130', '160,236,200'),
           'domino-freedom': ('60,200,140', '170,240,205'), 'domino-global': ('178,120,255', '220,196,255')}
 
 
@@ -400,7 +400,7 @@ def t_hull(cls, d=0):
     return tile(cls, viz, t('cap_3d'), t('mg_3d_h'), t('mg_3d_p'), d)
 
 
-# ---- Quran Guardians (first called Hafiz; its key stays "hafiz"): a verse with its translation, words hidden for memorising, the
+# ---- Quran Guardians (first called Hafiz; its key and folder are "quran-guardians" since 28 November 2026): a verse with its translation, words hidden for memorising, the
 # days of review. The verse is the first of the Quran, letter for letter as
 # in the Tanzil text the app uses (never change it).
 BASMALA = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'
@@ -480,7 +480,7 @@ VSET = {
     'petro-rulers': dict(gx_ruler_aria='pr_ruler_aria', gx_ruler_p='pr_ruler_p', gx_scan_names='pr_scan_names', gx_h2='pr_h2', gx_p2='pr_p2',
                          flash_cards='pr_flash_cards', flash_cap='gr_cap_read', flash_h='pr_guide_h', flash_p='pr_guide_p'),
     'marinegram': dict(map_aria='mg_map_aria', map_h='mg_h1', map_p='mg_p1', flash_cards='mg_flash_cards', flash_h='mg_h2', flash_p='mg_p2', off_p='mg_off_p'),
-    'hafiz': dict(lang_h='hz_lang_h', lang_p='hz_lang_p', off_p='hz_off_p', more_items='hz_free_items', more_cap='cap_free', more_h='hz_h3', more_p='hz_p3'),
+    'quran-guardians': dict(lang_h='hz_lang_h', lang_p='hz_lang_p', off_p='hz_off_p', more_items='hz_free_items', more_cap='cap_free', more_h='hz_h3', more_p='hz_p3'),
     'domino-freedom': dict(off_p='df_p1'),
     'domino-global': dict(map_aria='dm_map_aria', map_cap='cap_together', map_h='dg_h2', map_p='dg_p2'),
 }
@@ -511,7 +511,7 @@ def panel_tiles(slug, k):
         tiles = [t_map('w7', 0, MINES), t_conv('w5', .08), t_flash(''), t_quiz('', .08, ORE_QUIZ), t_lang('', .16)]
     elif slug == 'marinegram':
         tiles = [t_map('w7', 0, PORTS), t_ship('w5', .08), t_flash(''), t_prop('', .08), t_hull('', .16)]
-    elif slug == 'hafiz':
+    elif slug == 'quran-guardians':
         tiles = [t_verse('w7'), t_hide('w5', .08), t_sched('w8'), t_lang('', .08, *HAFIZ_LANGS)]
     elif slug == 'domino-freedom':
         tiles = [t_offline(''), t_table('', .08, t('cap_together'), t('df_h2'), t('df_p2')), t_domino('', .16, t('cap_light'), t('df_h3'), t('df_p3'))]
@@ -541,22 +541,22 @@ def band(words):
 # Geo-Rulers' old rows ("gr_..."). The "-Rulers" apps (Geo-Rulers, rows
 # "gx_...", and Petro-Rulers, rows "pr_...") are measuring and camera tools
 # only: the reference content is in their "-Gram" partner (owner, 26 and
-# 27 November 2026). MarineGram (rows "mg_...") and Hafiz (rows "hz_...")
+# 27 November 2026). MarineGram (rows "mg_...") and Quran Guardians (rows "hz_...")
 # joined on 27 November 2026.
 SOON = [
     ('petro-rulers', 'Petro-Rulers', 'pr', '255,196,0', ('cap_measure', 'cap_camera', 'cap_family')),
     ('geo-rulers', 'Geo-Rulers', 'gx', '194,97,28', ('cap_measure', 'cap_camera', 'cap_family')),
     ('oregram', 'OreGram', 'gr', '184,134,11', ('conv_cap', 'flash_cap', 'map_cap')),
     ('marinegram', 'MarineGram', 'mg', '30,111,217', ('map_cap', 'flash_cap', 'more_cap')),
-    ('hafiz', 'Quran Guardians', 'hz', '212,175,55', ('gr_cap_read', 'flash_cap', 'cap_free')),
+    ('quran-guardians', 'Quran Guardians', 'hz', '212,175,55', ('gr_cap_read', 'flash_cap', 'cap_free')),
     ('domino-freedom', 'Domino Freedom', 'df', '22,160,102', ('off_cap', 'cap_together', 'cap_light')),
     ('domino-global', 'Domino Global', 'dg', '139,53,201', ('more_cap', 'cap_together', 'cap_family')),
 ]
 SOON_BY = {a[0]: a for a in SOON}
 # The order of the tabs on the home page (owner, 26 November 2026; MarineGram
-# and Hafiz added at the end on 27 November 2026). An app's
+# and Quran Guardians added at the end on 27 November 2026). An app's
 # number ("App 02") is its place in this list. The first tab is open at the start.
-ORDER = ['petro-rulers', 'petrogram', 'geo-rulers', 'oregram', 'domino-global', 'domino-freedom', 'marinegram', 'hafiz']
+ORDER = ['petro-rulers', 'petrogram', 'geo-rulers', 'oregram', 'domino-global', 'domino-freedom', 'marinegram', 'quran-guardians']
 
 
 def num(slug):
@@ -577,7 +577,7 @@ PAGES = {
 SOLO = {
     'petro-rulers': ('Petro-<em class="s">Rulers</em>', 'tools,drop'),
     'marinegram': ('Marine<em class="s">Gram</em>', 'anchor,globe'),
-    'hafiz': ('Quran <em class="s">Guardians</em>', 'arch'),
+    'quran-guardians': ('Quran <em class="s">Guardians</em>', 'arch'),
 }
 
 
@@ -896,7 +896,7 @@ def geo(slug):
 </main>'''
 
 
-# ------------------------------- Petro-Rulers, MarineGram and Hafiz pages
+# ------------------------------- Petro-Rulers, MarineGram and Quran Guardians pages
 # The page of an app that is still being made (SOLO): hero, band, living
 # tiles, the "coming soon" box and the links to its privacy policy and terms. Its
 # texts are the rows "<key>_..." of site_texts.py (key: "pr", "mg" or "hz").
@@ -1227,7 +1227,7 @@ for L in LANGS:
            page('delete', doc('delete-account', geo_delete_secs(slug), slug, name), f'/{slug}/delete-account/', JS, name=name, app=slug))
         wr(out / slug / 'terms/index.html',
            page('terms', doc('terms', geo_terms_secs[slug], slug, name), f'/{slug}/terms/', JS, name=name, app=slug))
-    # Petro-Rulers, MarineGram and Hafiz: each one's page, privacy policy and terms of use.
+    # Petro-Rulers, MarineGram and Quran Guardians: each one's page, privacy policy and terms of use.
     for slug in SOLO:
         wr(out / slug / 'privacy/index.html', page('sprivacy', solo_doc(slug, 'privacy'), f'/{slug}/privacy/', JS, name=NAME[slug], app=slug))
         wr(out / slug / 'terms/index.html', page('terms', solo_doc(slug, 'terms'), f'/{slug}/terms/', JS, name=NAME[slug], app=slug))

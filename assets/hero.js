@@ -197,7 +197,7 @@
     return sh;
   }
 
-  // A pointed arch with a crescent and an open book (Hafiz).
+  // A pointed arch with a crescent and an open book (Quran Guardians).
   function makeArch() {
     const sh = blank();
     const arch = (hw, t) => {                // a point of a pointed arch of half-width hw, t in 0..1

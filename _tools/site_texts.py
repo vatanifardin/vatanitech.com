@@ -192,7 +192,7 @@ TX = {
           'Gəmi növləri və onların texniki təsviri, mühərriklər və elektrik sistemləri, gəmilərin 3D modelləri.',
           'Типы судов и их технические описания, двигатели и электрические системы, 3D-модели судов.'),
 # Quran Guardians (first called Hafiz, renamed 28 November 2026; the rows keep
-# "hz_" and the folder /hafiz/). Free, no ads; optional gifts. The app
+# "hz_"; the folder is /quran-guardians/). Free, no ads; optional gifts. The app
 # has eight languages; the translation of the meaning exists in six (no
 # Russian one yet), so the card names them.
 'hz_sub': ('Read and memorise the Quran.', 'Quranı oxuyun və əzbərləyin.', 'Читайте Коран и учите его наизусть.'),
@@ -526,7 +526,7 @@ TX = {
               'Geo-Rulers hazırda yaradılır və sınaqdan keçirilir. Hələ App Store və Google Play-də yoxdur: bizə yazın, çıxanda sizə xəbər verək.',
               'Geo-Rulers сейчас создаётся и проходит испытания. В App Store и Google Play его пока нет: напишите нам, и мы сообщим, когда он появится.'),
 
-# ------------------- pages of Petro-Rulers, MarineGram and Hafiz (27 Nov 2026)
+# ------------------- pages of Petro-Rulers, MarineGram and Quran Guardians (27 Nov 2026)
 # Built by solo() in build.py: hero, moving band, living tiles and the box
 # that says the app is still being made. No privacy or terms pages yet.
 'soon_h': ('Coming soon.', 'Tezliklə.', 'Скоро.'),
@@ -614,7 +614,7 @@ TX = {
 'mg_off_p': ('Far offshore, in port or on a plane: everything important works offline.',
              'Açıq dənizdə, limanda və ya təyyarədə: vacib olan hər şey oflayn işləyir.',
              'В открытом море, в порту или в самолёте: всё важное работает офлайн.'),
-# Quran Guardians (Hafiz)
+# Quran Guardians (first called Hafiz)
 'hz_title': ('Quran Guardians · Vatani Tech', 'Quran Guardians · Vatani Tech', 'Quran Guardians · Vatani Tech'),
 'hz_desc': ('Quran Guardians: a free app for reading and memorising the Quran, with recitations, tafsir, hadiths and prayer times, with no ads, in eight languages. In development.',
             'Quran Guardians: Quranı oxumaq və əzbərləmək üçün pulsuz, reklamsız tətbiq: tilavətlər, təfsir, hədislər və namaz vaxtları ilə, səkkiz dildə. Hazırlanır.',

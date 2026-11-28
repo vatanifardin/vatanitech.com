@@ -362,7 +362,7 @@ section.block { padding: 130px 0; position: relative; }
 .tile h4 a { color: inherit; }
 @media (max-width: 640px) { .scan { grid-template-columns: 120px 1fr; gap: 18px; } @keyframes beam { from { transform: translateY(-20px); } to { transform: translateY(94px); } } }
 
-/* Tile: a verse with its translation (Hafiz) */
+/* Tile: a verse with its translation (Quran Guardians) */
 .verse { width: 100%; max-width: 460px; text-align: center; }
 .verse .ref { font: 500 11px/1 var(--mono); letter-spacing: .16em; color: var(--teal); }
 .verse .ar, .hide span { font-family: "Amiri Quran", "Amiri", "Geeza Pro", "Noto Naskh Arabic", "Traditional Arabic", serif; color: #fff; }
@@ -374,7 +374,7 @@ section.block { padding: 130px 0; position: relative; }
 .verse .chip { padding: 8px 9px; }
 .verse .src { display: inline-block; margin-top: 14px; font-size: 11.5px; color: var(--dim); }
 
-/* Tile: words hidden for memorising (Hafiz) */
+/* Tile: words hidden for memorising (Quran Guardians) */
 .hidebox { display: grid; gap: 20px; justify-items: center; width: 100%; }
 .hide { direction: rtl; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .hide span { font-size: 25px; line-height: 1.9; padding: 2px 14px; border-radius: 12px; border: 1px solid var(--line-2); background: rgba(6,9,18,.55); }
@@ -384,7 +384,7 @@ section.block { padding: 130px 0; position: relative; }
 .hidebox .chips { justify-content: center; gap: 6px; }
 .hidebox .chip { padding: 8px 10px; }
 
-/* Tile: the days of review (Hafiz) */
+/* Tile: the days of review (Quran Guardians) */
 .sched { width: 100%; max-width: 470px; }
 .sched svg, .ship svg, .prop svg { width: 100%; height: auto; display: block; overflow: visible; }
 .sched .rail { stroke: rgba(140,160,220,.25); stroke-width: 2; }
